@@ -672,7 +672,7 @@ function computeFields() {
         shaders.vorticity.use();
         shaders.vorticity.setFloat('gs', params.gridScale);
         shaders.vorticity.setTexture('velocity', fields.velocity.front.texture, 0);
-        drawQuad(fields.vorticity.buffer);
+        //drawQuad(fields.vorticity.buffer);
 
         computeBoundaries(fields.velocity, -1);
 
@@ -712,13 +712,14 @@ function computeFields() {
     shaders.gradient.setFloat('gs', params.gridScale);
     shaders.gradient.setTexture('field', fields.pressure.front.texture, 0);
     drawQuad(fields.pressure.back.buffer);
-
-    // Calculate U = W - grad(P) where div(U)=0
-    shaders.subtract.use();
-    shaders.subtract.setTexture('a', fields.velocity.front.texture, 0);
-    shaders.subtract.setTexture('b', fields.pressure.back.texture, 1);
-    drawQuad(fields.velocity.back.buffer);
-    fields.velocity.swap();
+    if (params.addVorticity) {
+	    // Calculate U = W - grad(P) where div(U)=0
+	    shaders.subtract.use();
+	    shaders.subtract.setTexture('a', fields.velocity.front.texture, 0);
+	    shaders.subtract.setTexture('b', fields.pressure.back.texture, 1);
+	    drawQuad(fields.velocity.back.buffer);
+	    fields.velocity.swap();
+	}
 }
 
 function computeBoundaries(swapFBO, scale) {
