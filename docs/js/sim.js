@@ -474,14 +474,6 @@ function setupParamsForm(params) {
     document.getElementById("chkRadialForce").checked = params.radialForce;
     document.getElementById("chkRadialForce").addEventListener('change', updateParamFlags);
 
-    document.getElementById('txtGridScale').value = params.gridScale;
-    document.getElementById('txtVorticity').value = params.vorticity;
-    document.getElementById('txtViscosity').value = params.viscosity;
-    document.getElementById('txtInkViscosity').value = params.inkViscosity;
-    document.getElementById('txtDissipation').value = params.advectionDissipation;
-    document.getElementById('txtInkDissipation').value = params.inkAdvectionDissipation;
-    document.getElementById('txtRadius').value = params.forceRadius;
-    document.getElementById('txtVolume').value = params.inkVolume;
 }
 
 function updateParamFlags() {
@@ -495,14 +487,6 @@ function updateParamFlags() {
 }
 
 function updateFromParamVars() {
-    params.gridScale = parseFloat(document.getElementById('txtGridScale').value);
-    params.vorticity = parseFloat(document.getElementById('txtVorticity').value);
-    params.viscosity = parseFloat(document.getElementById('txtViscosity').value);
-    params.inkViscosity = parseFloat(document.getElementById('txtInkViscosity').value);
-    params.advectionDissipation = parseFloat(document.getElementById('txtDissipation').value);
-    params.inkAdvectionDissipation = parseFloat(document.getElementById('txtInkDissipation').value);
-    params.forceRadius = parseFloat(document.getElementById('txtRadius').value);
-    params.inkVolume = parseFloat(document.getElementById('txtVolume').value);
 }
 
 function updateDisplayField() {
