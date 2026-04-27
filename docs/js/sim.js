@@ -697,7 +697,7 @@ function computeFields() {
         let beta = alpha + 4;
         solvePoissonSystem(fields.ink, fields.ink.front, alpha, beta);
     }
-
+    if (params.addVorticity) {
     // Calculate div(W)
     shaders.divergence.use();
     shaders.divergence.setFloat('gs', params.gridScale);
@@ -712,7 +712,6 @@ function computeFields() {
     shaders.gradient.setFloat('gs', params.gridScale);
     shaders.gradient.setTexture('field', fields.pressure.front.texture, 0);
     drawQuad(fields.pressure.back.buffer);
-    if (params.addVorticity) {
 	    // Calculate U = W - grad(P) where div(U)=0
 	    shaders.subtract.use();
 	    shaders.subtract.setTexture('a', fields.velocity.front.texture, 0);
